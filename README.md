@@ -20,18 +20,23 @@ Este repositório contém o pipeline de machine learning em R para classificaç�
 
 ## Gráficos
 
-### Comparação de algoritmos
-![Comparação dos algoritmos](img/Comparacao%20dos%20algoritimos.png)
+### Comparação de algoritmos (base)
+![Comparação dos algoritmos base](<img/Grafico - Comparacao Algoritmos Base.png>)
+
+### Comparação de algoritmos (threshold otimizado)
+![Comparação dos algoritmos com threshold](<img/Grafico - Comparacao Algoritmos com Threshold.png>)
 
 ### ROC do melhor modelo
-![ROC melhor modelo](img/Roc%20Melhor%20modelo.png)
+![ROC melhor modelo](<img/Grafico - ROC Melhor Modelo.png>)
 
 ### Matriz de confusão do melhor modelo
-![Matriz de confusão](img/Matriz%20de%20confusao.png)
+![Matriz de confusão](<img/Grafico - Matriz de Confusao.png>)
 
 ### Distribuição de probabilidades
-![Distribuição de probabilidades](img/Distribuicao%20de%20probabilidades.png)
+![Distribuição de probabilidades](<img/Grafico - Distribuicao De Probabilidades.png>)
+
+### Impacto do limiar de classificação
+![Impacto do limiar de classificação](<img/Grafico - Impacto Do Limiar De Classificação.png>)
 
 ### Importância das variáveis
-![Importância das variáveis](img/importacia%20das%20variaveis.png)
-
+![Importância das variáveis](<img/Grafico - Importancia das Variaveis Selecionadas.png>)
