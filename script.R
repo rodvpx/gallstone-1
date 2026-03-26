@@ -1,3 +1,9 @@
+# ============================================================
+# Analise: Gallstone - https://archive.ics.uci.edu/dataset/1150/gallstone-1
+# Autores: - Luis Henrique Rodrigues de Oliveira, 
+#           - Rodrigo Simão Guimarães
+#           - Luan Henrique Campos Soares
+
 ############################################################
 # 0. INSTALAÇÃO DE PACOTES (EXECUTAR UMA VEZ)
 ############################################################
