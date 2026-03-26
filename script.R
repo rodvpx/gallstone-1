@@ -469,7 +469,57 @@ ggplot(prob_df, aes(x = Prob, fill = Classe)) +
   )
 
 ############################################################
-# 15.1 IMPORTÂNCIA DAS VARIÁVEIS (MELHOR RESULTADO)
+# 15.1 IMPACTO DO LIMIAR DE CLASSIFICAÇÃO
+############################################################
+threshold_grid <- seq(0.05, 0.95, by = 0.01)
+
+threshold_impact <- lapply(threshold_grid, function(thr) {
+  pred_thr <- factor(
+    ifelse(best_prob > thr, "Yes", "No"),
+    levels = c("No", "Yes")
+  )
+
+  cm_thr <- confusionMatrix(pred_thr, obs_best, positive = "Yes")
+
+  data.frame(
+    Threshold = thr,
+    Accuracy = as.numeric(cm_thr$overall["Accuracy"]),
+    Sensitivity = as.numeric(cm_thr$byClass["Sensitivity"]),
+    Specificity = as.numeric(cm_thr$byClass["Specificity"]),
+    Precision = as.numeric(cm_thr$byClass["Pos Pred Value"]),
+    F1 = f1_score(cm_thr)
+  )
+}) %>%
+  bind_rows()
+
+threshold_impact_long <- threshold_impact %>%
+  dplyr::select(Threshold, Accuracy, Sensitivity, Specificity, F1) %>%
+  pivot_longer(
+    cols = c(Accuracy, Sensitivity, Specificity, F1),
+    names_to = "Metrica",
+    values_to = "Valor"
+  )
+
+ggplot(threshold_impact_long, aes(x = Threshold, y = Valor, color = Metrica)) +
+  geom_line(linewidth = 1) +
+  geom_vline(
+    xintercept = best_threshold,
+    linetype = "dashed",
+    color = "black",
+    linewidth = 0.8
+  ) +
+  scale_y_continuous(limits = c(0, 1)) +
+  theme_minimal() +
+  labs(
+    title = paste0("Impacto do Limiar de Classificação - ", best_model_name),
+    subtitle = paste0("Linha tracejada = limiar otimizado (", round(best_threshold, 3), ")"),
+    x = "Limiar de classificação",
+    y = "Score",
+    color = "Métrica"
+  )
+
+############################################################
+# 15.2 IMPORTÂNCIA DAS VARIÁVEIS (MELHOR RESULTADO)
 ############################################################
 if (grepl("XGBoost|Blend", best_model_name)) {
   imp_xgb <- xgb.importance(model = xgb_model$model, feature_names = selected_vars)
